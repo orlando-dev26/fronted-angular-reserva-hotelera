@@ -4,26 +4,26 @@
     <div class="page-title-content">
       <h2>Hoteles en cualquier parte del mundo</h2>
       <p>Buscar hoteles</p>
-      <form class="banner-form-style">
+      <form class="banner-form-style" (ngSubmit)="onSearch()">
         <div class="row align-items-center">
           <div class="col-xl-3 col-lg-6 col-sm-5">
             <div class="form-group">
               <label for="">Lugar</label>
-              <input type="text" class="form-control" placeholder="Hacia donde vas?">
+              <input type="text" class="form-control" placeholder="1 (California), 2 (Transilvania)..." [(ngModel)]="cityInput" name="cityInput">
               <img src="/images/icon/search.svg" alt="buscar">
             </div>
           </div>
           <div class="col-xl-3 col-lg-6 col-sm-5">
             <div class="form-group">
               <label for="">Fecha Entrada</label>
-              <dp-date-picker theme="dp-material" placeholder="Ingresar Fecha" [config]="datePickerConfig" required="true"></dp-date-picker>
+              <dp-date-picker theme="dp-material" placeholder="Ingresar Fecha" [config]="datePickerConfig" [(ngModel)]="startDate" name="startDate" required="true"></dp-date-picker>
               <img src="/images/icon/calendar.svg" alt="calendario">
             </div>
           </div>
           <div class="col-xl-3 col-lg-6 col-sm-5">
             <div class="form-group">
               <label for="">Fecha Salida</label>
-              <dp-date-picker theme="dp-material" placeholder="Ingresar Fecha" [config]="datePickerConfig" required="true"></dp-date-picker>
+              <dp-date-picker theme="dp-material" placeholder="Ingresar Fecha" [config]="datePickerConfig" [(ngModel)]="endDate" name="endDate" required="true"></dp-date-picker>
               <img src="/images/icon/calendar.svg" alt="calendario">
             </div>
           </div>
@@ -31,7 +31,7 @@
             <div class="form-group">
               <label for="">Pasajeros</label>
               <input type="text" class="form-control" placeholder="Agregar">
-              <img src="/images/icon/user-check.svg" alt="calendario">
+              <img src="/images/icon/user-check.svg" alt="pasajeros">
             </div>
           </div>
           <div class="col-lg-1 col-md-112">
@@ -48,6 +48,9 @@
 </div>
 
 <!-- Hotel listing -->
-<app-hotel-listing>
-
+<app-hotel-listing
+  *ngIf="showResults"
+  [startDate]="startDate"
+  [endDate]="endDate"
+  [cityName]="cityInput">
 </app-hotel-listing>
